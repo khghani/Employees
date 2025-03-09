@@ -46,59 +46,6 @@ class Employee(ABC):
         self.happiness = INITIAL_HAPPINESS
         self.salary = salary
 
-    @property
-    def name(self):
-        return self.__name
-
-    @property
-    def manager(self):
-        return self.__manager
-    
-    @property
-    def salary(self):
-        return self.salary
-    
-    @salary.setter
-    def salary(self, value):
-        if value < 0:
-            raise ValueError(SALARY_ERROR_MESSAGE)
-    
-    @property
-    def happiness(self):
-        return self.happiness
-    
-    @happiness.setter
-    def happiness(self, value):
-        self.happiness = max(PERCENTAGE_MIN, min(PERCENTAGE_MAX), value)
-
-    @property
-    def performance(self):
-        return self.performance
-    
-    @performance.setter
-    def performance(self, value):
-        self.performance = max(PERCENTAGE_MIN, min(PERCENTAGE_MAX), value)
-
-    @abstractmethod
-    def work(self):
-        pass
-
-    def interact(self, other):
-        if other.name not in self.relationships:
-            self.relationships[other.name] = 0
-        if self.relationships[other.name] > RELATIONSHIP_THRESHOLD:
-            self.happiness += 1
-        elif self.happiness >= HAPPINESS_THRESHOLD and other.happiness >= HAPPINESS_THRESHOLD:
-            self.relationships[other.name] += 1
-        else:
-            self.relationships[other.name] -= 1
-            self.happiness -= 1
-    
-    def dailyexpense(self):
-        self.savings -= DAILY_EXPENSE
-        self.happiness -= 1
-
-
 class Manager(Employee):
     """
     A subclass of Employee representing a manager.
@@ -113,7 +60,6 @@ class Manager(Employee):
         else:
             self.happiness += 1
 
-
 class TemporaryEmployee(Employee):
     """
     A subclass of Employee representing a temporary employee.
@@ -125,7 +71,6 @@ class TemporaryEmployee(Employee):
             self.happiness -= 2
         else:
             self.happiness += 1
-
 
 class PermanentEmployee(Employee):
     """
