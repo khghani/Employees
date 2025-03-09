@@ -31,7 +31,6 @@ PERCENTAGE_MIN = 0
 SALARY_ERROR_MESSAGE = "Salary must be non-negative."
 
 
-# TODO: implement this class. You may delete this comment when you are done.
 class Employee(ABC):
     """
     Abstract base class representing a generic employee in the system.
@@ -47,8 +46,59 @@ class Employee(ABC):
         self.happiness = INITIAL_HAPPINESS
         self.salary = salary
 
+    @property
+    def name(self):
+        return self.__name
 
-# TODO: implement this class. You may delete this comment when you are done.
+    @property
+    def manager(self):
+        return self.__manager
+    
+    @property
+    def salary(self):
+        return self.salary
+    
+    @salary.setter
+    def salary(self, value):
+        if value < 0:
+            raise ValueError(SALARY_ERROR_MESSAGE)
+    
+    @property
+    def happiness(self):
+        return self.happiness
+    
+    @happiness.setter
+    def happiness(self, value):
+        self.happiness = max(PERCENTAGE_MAX, min(PERCENTAGE_MIN), value)
+
+    @property
+    def performance(self):
+        return self.performance
+    
+    @performance.setter
+    def performance(self, value):
+        self.performance = max(PERCENTAGE_MAX, min(PERCENTAGE_MIN), value)
+
+    @abstractmethod
+    def work(self):
+        pass
+
+    def interact(self, other):
+        if other.name not in self.relationships:
+            self.relationships[other.name] = 0
+        if self.relationships[other.name] > RELATIONSHIP_THRESHOLD:
+            self.happiness += 1
+        elif self.happiness >= HAPPINESS_THRESHOLD and other.happiness >= HAPPINESS_THRESHOLD:
+            self.relationships[other.name] += 1
+        else:
+            self.relationships[other.name] -= 1
+            self.happiness -= 1
+    
+    def dailyexpense(self):
+        self.savings -= DAILY_EXPENSE
+        self.happiness -= 1
+
+
 class Manager(Employee):
     def work(self):
         performance_adjusted = random.randint(-5,5)
@@ -64,7 +114,6 @@ class Manager(Employee):
     """
 
 
-# TODO: implement this class. You may delete this comment when you are done.
 class TemporaryEmployee(Employee):
     def work(self):
         performance_adjusted = random.randint(-15, 15)
@@ -78,7 +127,6 @@ class TemporaryEmployee(Employee):
     """
 
 
-# TODO: implement this class. You may delete this comment when you are done.
 class PermanentEmployee(Employee):
     def work(self):
         perforamnce_adjusted = random.randint(10, 10)
