@@ -69,7 +69,7 @@ class Employee(ABC):
     
     @happiness.setter
     def happiness(self, value):
-        self.happiness = max(PERCENTAGE_MAX, min(PERCENTAGE_MIN), value)
+        self.happiness = max(PERCENTAGE_MIN, min(PERCENTAGE_MAX), value)
 
     @property
     def performance(self):
@@ -77,7 +77,7 @@ class Employee(ABC):
     
     @performance.setter
     def performance(self, value):
-        self.performance = max(PERCENTAGE_MAX, min(PERCENTAGE_MIN), value)
+        self.performance = max(PERCENTAGE_MIN, min(PERCENTAGE_MAX), value)
 
     @abstractmethod
     def work(self):
@@ -100,6 +100,9 @@ class Employee(ABC):
 
 
 class Manager(Employee):
+    """
+    A subclass of Employee representing a manager.
+    """
     def work(self):
         performance_adjusted = random.randint(-5,5)
         self.performance += performance_adjusted
@@ -109,12 +112,12 @@ class Manager(Employee):
                 self.relationships[employee] -= 1
         else:
             self.happiness += 1
-    """
-    A subclass of Employee representing a manager.
-    """
 
 
 class TemporaryEmployee(Employee):
+    """
+    A subclass of Employee representing a temporary employee.
+    """
     def work(self):
         performance_adjusted = random.randint(-15, 15)
         self.performance += performance_adjusted
@@ -122,17 +125,14 @@ class TemporaryEmployee(Employee):
             self.happiness -= 2
         else:
             self.happiness += 1
-    """
-    A subclass of Employee representing a temporary employee.
-    """
 
 
 class PermanentEmployee(Employee):
+    """
+    A subclass of Employee representing a permanent employee.
+    """
     def work(self):
         perforamnce_adjusted = random.randint(10, 10)
         self.performance += perforamnce_adjusted
         if perforamnce_adjusted >= 0:
             self.happiness += 1
-    """
-    A subclass of Employee representing a permanent employee.
-    """
