@@ -129,7 +129,7 @@ class TemporaryEmployee(Employee):
                 self.performance >= TEMP_EMPLOYEE_PERFORMANCE_THRESHOLD:
                 self.savings += MANAGER_BONUS
             elif other.happiness <= HAPPINESS_THRESHOLD:
-                self.salary = 2
+                self.salary //= 2
                 self.happiness -= 5
                 if self.salary == 0:
                     self.is_employed = False
