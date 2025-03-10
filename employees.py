@@ -54,24 +54,24 @@ class Employee(ABC):
         return self.__manager
     @property
     def happiness(self):
-        return self.happiness
+        return self._happiness
     @happiness.setter
     def happiness(self, value):
-        self.happiness = max(PERCENTAGE_MIN, min(PERCENTAGE_MAX, value))
+        self._happiness = max(PERCENTAGE_MIN, min(PERCENTAGE_MAX, value))
     @property
     def performance(self):
-        return self.performance
+        return self._performance
     @performance.setter
     def performance(self, value):
-        self.performance = max(PERCENTAGE_MIN, min(PERCENTAGE_MAX, value))
+        self._performance = max(PERCENTAGE_MIN, min(PERCENTAGE_MAX, value))
     @property
     def salary(self):
-        return self.salary
+        return self._salary
     @salary.setter
     def salary(self, value):
         if value < 0:
             raise ValueError(SALARY_ERROR_MESSAGE)
-        self.salary = value
+        self._salary = value
     @abstractmethod
     def work(self):
         pass
