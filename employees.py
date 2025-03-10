@@ -85,7 +85,7 @@ class Employee(ABC):
         else:
             self.relationships[other.name] -= 1
             self.happiness -= 1
-    def dailyexpenses(self):
+    def daily_expense(self):
         self.savings -= DAILY_EXPENSE
         self.happiness -= 1
 
